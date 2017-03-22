@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="school.binjiang.mapper.ScoreMapper">
+	<insert id="add" parameterType="Score">
+		insert into t_score(english, math, computer, mzd, dxp, history, xxds, stuId) 
+		values(#{english}, #{math}, #{computer}, #{mzd}, #{dxp},  #{history}, #{xxds}, #{stuId})
+	</insert>
+	
+	<delete id="delete" parameterType="int">
+		delete from t_score where scoreId = #{scoreId}
+	</delete>
+	
+	<update id="update" parameterType="Score">
+		update t_score set english = #{english}, math = #{math}, computer = #{computer}, mzd = #{mzd}, dxp = #{dxp}
+		sports = #{sports}, mks = #{mks}, xxds = #{xxds} where scoreId = #{scoreId}
+	</update>
+	
+	<resultMap type="Score" id="ScoreStudentMap">
+		<id property="scoreId" column="scoreId"/>
+		<result property="english" column="english"/>
+		<result property="math" column="math"/>
+		<result property="computer" column="computer"/>
+		<result property="mzd" column="mzd"/>
+		<result property="dxp" column="dxp"/>
+		<result property="history" column="history"/>
+		<result property="xxds" column="xxds"/>
+		<association property="stu" javaType="Student">
+			<id property="stuId" column="stuId"/>
+			<result property="stuNo" column="stuNo"/>
+			<result property="stuName" column="stuName"/>
+			<result property="major" column="major"/>
+			<result property="gender" column="gender"/>
+		</association>
+	</resultMap>
+	
+	<select id="findByNoNameMajor" resultType="Student" resultMap="ScoreStudentMap" >
+		select  st.stuNo, st.stuName, st.major, st.gender, sc.*
+		from t_score sc, t_student st where sc.stuId = st.stuId
+		<if test="stuNo != null and stuNo != ''">
+			and st.stuNo = #{stuNo}
+		</if>
+		<if test="stuName != null and stuName != ''">
+			and st.stuName like concat ('%', #{stuName}, '%')
+		</if>
+		<if test="major != null and major != ''">
+			and st.major like concat ('%', #{major}, '%')
+		</if>
+		<if test="gender != null and gender != ''">
+			and st.gender = #{gender}
+		</if>
+	</select>
+	
+	<select id="findById" parameterType="int" resultType="Score">
+		select * from t_score where scoreId = #{scoreId}
+	</select>
+	
+	<select id="findByStuId" parameterType="int" resultType="Score">
+		select * from t_score where stuId = #{stuId}
+	</select>
+	
+
+</mapper>

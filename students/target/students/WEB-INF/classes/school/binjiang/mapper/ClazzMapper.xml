@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="school.binjiang.mapper.ClazzMapper">
+	<insert id="add" parameterType="Clazz">
+		insert into t_class(className, number, location, teacher, description)
+		values(#{className}, #{number}, #{location}, #{teacher}, #{description})
+	</insert>
+	
+	<delete id="delete" parameterType="int">
+		delete from t_class where classId = #{classId}
+	</delete>
+	
+	<update id="update" parameterType="Clazz">
+		update t_class set className = #{className}, number = #{number}, location = #{location},
+		teacher = #{teacher}, description = #{description} where classId = #{classId}
+	</update>
+	
+	<select id="findAll" resultType="Clazz">
+		select * from t_class
+	</select>
+</mapper>
+	

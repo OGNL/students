@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="school.binjiang.mapper.ScoreMapper">
+	<insert id="add" parameterType="Score">
+		insert into t_score(stuName, stuNo, courseName, score) 
+		values(#{stuName}, #{stuNo}, #{courseName}, #{score})
+	</insert>
+	
+	<delete id="delete" parameterType="int">
+		delete from t_score where scoreId = #{scoreId}
+	</delete>
+	
+	<update id="update" parameterType="Score">
+		update t_score set stuName = #{stuName}, stuNo = #{stuNo}, courseName = #{courseName},
+		score = #{score} where scoreId = #{scoreId}
+	</update>
+	
+	<select id="findAll" resultType="Score" >
+		select * from t_score
+	</select>
+	
+	
+
+</mapper>
