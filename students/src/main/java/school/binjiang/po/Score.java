@@ -19,6 +19,11 @@ public class Score implements Serializable {
 	private int history;
 	
 	private Student stu;
+	
+	private String stuNo;
+	private String stuName;
+	private String gender;
+	private String major;
 	public int getScoreId() {
 		return scoreId;
 	}
@@ -81,12 +86,30 @@ public class Score implements Serializable {
 	public void setHistory(int history) {
 		this.history = history;
 	}
-	
-	
-	
-	
-
-	
+	public String getStuNo() {
+		return stuNo;
+	}
+	public void setStuNo(String stuNo) {
+		this.stuNo = stuNo;
+	}
+	public String getStuName() {
+		return stuName;
+	}
+	public void setStuName(String stuName) {
+		this.stuName = stuName;
+	}
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	public String getMajor() {
+		return major;
+	}
+	public void setMajor(String major) {
+		this.major = major;
+	}
 	
 	
 	

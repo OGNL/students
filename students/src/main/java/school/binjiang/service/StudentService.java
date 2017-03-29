@@ -4,6 +4,7 @@ import java.util.List;
 
 import school.binjiang.po.PageBean;
 import school.binjiang.po.Student;
+import school.binjiang.vo.StudentVo;
 
 public interface StudentService {
 	
@@ -22,5 +23,11 @@ public interface StudentService {
 	public Student showById(int id);
 	
 	public Student showByNoAndName(Student student);
+	
+	public List<StudentVo> showNumByMajor(StudentVo stuVo);
+	
+	public List<StudentVo> showNumByGender(StudentVo stuVo);
+	
+	public List<StudentVo> showNumByAddress(StudentVo stuVo);
 
 }

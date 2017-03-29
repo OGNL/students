@@ -5,7 +5,7 @@
 <mapper namespace="school.binjiang.mapper.UserMapper">
 	
 	<insert id="add" parameterType="User">
-		insert into t_user(username, password, roleId)values(#{username},#{password},#{roleId});
+		insert into t_user(username, password, role)values(#{username},#{password},#{role});
 	</insert>
 	
 	<delete id="delete" parameterType="int">
@@ -13,7 +13,7 @@
 	</delete>
 	
 	<update id="updatePwdAndRole" parameterType="User">
-		update t_user set password=#{password},roleId=#{roleId} where userId = #{userId};
+		update t_user set password=#{password},role=#{role} where userId = #{userId};
 	</update>
 	
 	<select id="findAll" resultType="User">
@@ -22,6 +22,31 @@
 	
 	<select id="findByName" resultType="User" parameterType="String">
 		select * from t_user where username = #{username};
+	</select>
+	
+	<select id="findById" resultType="User" parameterType="int">
+		select * from t_user where userId = #{userId};
+	</select>
+	
+	<update id="updatePwd" parameterType="User">
+		update t_user set password=#{password} where userId = #{userId};
+	</update>
+	
+	<select id="findByNameRole" parameterType="User" resultType="User">
+		select * from t_user 
+		<where>
+			<if test="username != null and username != ''">
+				and username like concat('%',#{username},'%')
+			</if>
+			<choose>
+				<when test="role != null and role != '' and role != '管理员'">
+					and role = #{role}
+				</when>
+				<otherwise>
+					and role != '管理员'
+				</otherwise>
+			</choose>
+		</where>
 	</select>
 
 </mapper>

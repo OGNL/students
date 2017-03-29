@@ -2,10 +2,6 @@ package school.binjiang.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import school.binjiang.mapper.UserMapper;
 import school.binjiang.po.User;
 
 public interface UserService  {
@@ -16,9 +12,15 @@ public interface UserService  {
 	
 	public void updatePwdAndRole(User user);
 	
+	public void updatePwd(User user);
+	
 	public List<User> showAll();
 	
 	public User showByName(String name);
+	
+	public User showById(int id);
+	
+	public List<User> showByNameRole(User user);	
 	
 
 }

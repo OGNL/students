@@ -14,7 +14,7 @@
                 <ul class="nav" id="main-menu">
 
                     <li>
-                        <a href=""><i class="fa fa-dashboard"></i> 主页</a>
+                        <a href="${pageContext.request.contextPath}/home/show.action"><i class="fa fa-dashboard"></i> 主页</a>
                     </li>
                     <li id="1">
                         <a href=""><i class="fa fa-desktop"></i>学生管理<span class="fa arrow"></span></a>
@@ -22,43 +22,42 @@
                             <li>
                                 <a href="${pageContext.request.contextPath}/student/showall.action"> 学生信息表</a>
                             </li>
-                             <li>
-                                <a href="${pageContext.request.contextPath}/score/fuzzyQuery.action"> 学生成绩表</a>
-                            </li>
                         </ul>
                     </li>
-					<li id="2">
+                    <li id="2">
+                        <a href=""><i class="fa fa-table"></i>成绩管理<span class="fa arrow"></span> </a>
+                       	<ul class="nav nav-second-level">
+                            <li>
+                                <a href="${pageContext.request.contextPath}/score/fuzzyQuery.action">学期成绩表</a>
+                            </li>
+                        	 <li>
+                                <a href="${pageContext.request.contextPath}/grade/fuzzyQuery.action">等级考试情况表</a>
+                            </li>
+                        </ul>
+                        
+                    </li>
+					<li id="3">
                         <a href=""><i class="fa fa-bar-chart-o"></i>数据统计<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="">各专业学生人数统计</a>
+                                <a href="${pageContext.request.contextPath}/student/report.action">各年级学生情况分析</a>
+                            </li>
+                            <li>
+                                <a href="${pageContext.request.contextPath}/grade/report.action">英语、计算机考试通过率</a>
                             </li>
                         </ul>
                     </li>
-                    <li>
-                        <a href=""> <i class="fa fa-qrcode"></i>Responsive Tables</a>
-                    </li>
-                    <li>
-                        <a href=""><i class="fa fa-table"></i> Forms </a>
-                    </li>
-
-
-                    <li id="9">
+					<c:if test="${user.role eq '管理员'}">
+					<li id="9">
                         <a href="#"><i class="fa fa-sitemap"></i>系统设置<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="#">账户管理</a>
-                            </li>
-                            <li>
-                                <a href="#">Second Level Link</a>
-                            </li>
-                            <li>
-                                <a href="#">Second Level Link</a>
-                    
-
+                                <a href="${pageContext.request.contextPath}/user/fuzzyQuery.action">账户管理</a>
                             </li>
                         </ul>
                     </li>
+					</c:if>
+               
                 </ul>
 
             </div>

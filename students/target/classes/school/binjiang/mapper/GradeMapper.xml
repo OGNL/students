@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="school.binjiang.mapper.GradeMapper">
+	
+	<insert id="add" parameterType="Grade">
+		insert into t_grade(CET4, CET6, NCRE1, NCRE2, account, teacher, stuId)
+		values(#{CET4}, #{CET6}, #{NCRE1}, #{NCRE2}, #{account}, #{teacher}, #{stuId})
+	</insert>
+	
+	<delete id="delete" parameterType="int">
+		delete from t_grade where gradeId = #{gardeId}
+	</delete>
+	
+	<update id="update" parameterType="Grade">
+		update t_grade set CET4 = #{CET4}, CET6 = #{CET6}, NCRE1 = #{NCRE1}, NCRE2 = #{NCRE2},
+		account = #{account}, teacher = #{teacher} where gradeId = #{gradeId}
+	</update>
+	
+	<select id="findById" parameterType="int" resultType="Grade">
+		select * from t_grade where gradeId = #{gradeId}
+	</select>
+	
+	<select id="findByStuId" parameterType="int" resultType="Grade">
+		select * from t_grade where stuId = #{stuId}
+	</select>
+	
+	<resultMap type="Grade" id="GradeStudentMap">
+		<id property="gradeId" column="gradeId"/>
+		<result property="CET4" column="CET4"/>
+		<result property="CET6" column="CET6"/>
+		<result property="NCRE1" column="NCRE1"/>
+		<result property="NCRE2" column="NCRE2"/>
+		<result property="account" column="account"/>
+		<result property="teacher" column="teacher"/>
+			<result property="stuNo" column="stuNo"/>
+			<result property="stuName" column="stuName"/>
+			<result property="major" column="major"/>
+			<result property="gender" column="gender"/>
+		<association property="stu" javaType="Student">
+			<id property="stuId" column="stuId"/>
+			<result property="stuNo" column="stuNo"/>
+			<result property="stuName" column="stuName"/>
+			<result property="major" column="major"/>
+			<result property="gender" column="gender"/>
+		</association>
+	</resultMap>
+	
+	<select id="findByNoNameGenderMajor" parameterType="Student" resultMap="GradeStudentMap">
+		select st.stuNo, st.stuName, st.major, st.gender, gr.* 
+		from t_grade gr, t_student st where st.stuId = gr.stuId 
+		<if test="stuNo != null and stuNo != ''">
+			and st.stuNo = #{stuNo}
+		</if>
+		<if test="stuName != null and stuName != ''">
+			and st.stuName like concat ('%', #{stuName}, '%')
+		</if>
+		<if test="major != null and major != ''">
+			and st.major like concat ('%', #{major}, '%')
+		</if>
+		<if test="gender != null and gender != ''">
+			and st.gender = #{gender}
+		</if>
+	</select>
+
+</mapper>

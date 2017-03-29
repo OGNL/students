@@ -35,4 +35,17 @@ public class UserServiceImpl implements UserService {
 		return userMapper.findByName(name);
 	}
 
+	public void updatePwd(User user) {
+		userMapper.updatePwd(user);
+		
+	}
+
+	public List<User> showByNameRole(User user) {
+		return userMapper.findByNameRole(user);
+	}
+
+	public User showById(int id) {
+		return userMapper.findById(id);
+	}
+
 }

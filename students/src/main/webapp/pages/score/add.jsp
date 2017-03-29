@@ -111,7 +111,8 @@
 </body>
 <script src="${pageContext.request.contextPath}/js/bootstrapValidator.js" type="text/javascript"></script>
 <script type="text/javascript">
-showMenu(1);
+showMenu(2);
+
 $('#defaultForm').bootstrapValidator({
 //    live: 'disabled',
 
@@ -248,5 +249,4 @@ $('#defaultForm').bootstrapValidator({
 
 
 </script>
-<jsp:include page="../common/validate.jsp"></jsp:include>
 </html>

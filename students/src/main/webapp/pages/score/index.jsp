@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>学生成绩表</title>
+<title>学期成绩表</title>
 <jsp:include page="../common/taglibs.jsp"></jsp:include>
 <!-- FontAwesome Styles-->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/menu/font-awesome.css">
@@ -15,6 +15,9 @@
 <style type="text/css">
 #example_length{
 	height: 26px;
+}
+div.dialog-box-container.normal{
+	width: 185px;
 }
 </style>
 </head>
@@ -26,7 +29,7 @@
 		
 		<div id="page-wrapper">
 		<div class="title">
-				<h4>学生成绩表</h4>
+				<h4>学期成绩表</h4>
 		</div>
 		<div style="width: 990px; height: 125px; margin-top: 25px; margin-left: 65px;" >
 			<form id="selectForm" method="post">
@@ -43,7 +46,8 @@
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				专业：<input type="text" id="major" name="major">
 				<br/><br/>
-				<div style="margin-left: 765px;" ><a id="selectBtn" href="javascript:;" class="btn btn-primary">查询</a></div>
+				<div style="margin-left: 675px; float: left;" ><a id="selectBtn" href="javascript:;" class="btn btn-primary">查询</a></div>
+				<div style="margin-left: 25px; float: left;" ><a id="exportBtn" href="javascript:;" class="btn btn-primary">导出Excel</a></div>
 			</form>
 		</div>
 		<a id="addBtn" href="javascript:;">
@@ -63,7 +67,9 @@
 						<th>毛泽东<br/>思想</th>
 						<th>邓小平<br/>理论</th>
 						<th>中国近<br/>现代史</th>
+						<c:if test="${user.role eq '管理员' || user.role eq '教导主任'}">
 						<th>操作</th>
+						</c:if>
 					</tr>
 				</thead>
 				<tbody>
@@ -82,11 +88,12 @@
 									<td>${s.mzd}</td>
 									<td>${s.dxp}</td>
 									<td>${s.history}</td>
+									<c:if test="${user.role eq '管理员' || user.role eq '教导主任'}">
 									<td>
-										
-										<a href="javascript:;"><img src="${pageContext.request.contextPath}/img/edit.png" title="修改" width="25px" height="22px"  onclick="editBtn(${s.scoreId})"/></a>
+										<a href="javascript:;"><img src="${pageContext.request.contextPath}/img/edit.png" title="修改" width="25px" height="22px"  onclick="editBtn(${s.stu.stuId})"/></a>
 										<a href="javascript:;"><img src="${pageContext.request.contextPath}/img/delete.png" title="删除" width="25px" height="22px" onclick="deleteBtn(${s.scoreId})"/></a>
 									</td>
+									</c:if>
 								</tr>
 							</c:forEach>
 						</c:when>
@@ -95,6 +102,7 @@
 				</tbody>
 			</table>
 			<div id="btn-dialogBox"></div>
+			<div id="stantard-dialogBox"></div>
 		<!-- 	<div class="modalDiv" style="display: none;"></div>
 			<div id="formDiv" style="display: none;"></div> -->
 		</div>
@@ -104,7 +112,7 @@
 	<script  src="${pageContext.request.contextPath}/js/tables/dataTables.bootstrap.js"></script>
 	<script type="text/javascript" charset="utf-8">
 		$(document).ready(function() {
-			showMenu(1);
+			showMenu(2);
 			
 			$('#example').dataTable();
 			$("#stuNo").val('${stu.stuNo}');
@@ -116,6 +124,34 @@
 				$("#selectForm").attr("action","${pageContext.request.contextPath}/score/fuzzyQuery.action");
 				$("#selectForm").submit();
 			})
+			
+				$("#exportBtn").click(function(){
+				var stuNo = $("#stuNo").val();
+				var stuName = $("#stuName").val();
+				var gender = $("#gender").val();
+				var major = $("#major").val();
+				$.ajax({ 
+        			url: "${pageContext.request.contextPath}/score/exportExcel.action", 
+        			type:"post",
+        			data:"stuNo="+stuNo+"&stuName="+stuName+"&gender="+gender+"&major="+major, 
+        			dataType:"text",
+        			success: function(data){
+        	        	if(data == "success"){
+        	        		$('#stantard-dialogBox').dialogBox({
+        						title: '消息',
+        						hasClose: true,
+        						content: '导出成功！'
+        					});
+        	        	}else{
+        	        		$('#stantard-dialogBox').dialogBox({
+        						title: '消息',
+        						hasClose: true,
+        						content: '导出失败！'
+        					});
+        	        		
+        	        	}
+        	      }});
+			});
 			
 			$("#addBtn").click(function(){
 				location.href = "${pageContext.request.contextPath}/score/toadd.action";

@@ -44,6 +44,9 @@
 #example_length{
 	height: 26px;
 }
+div.dialog-box-container.normal{
+	width: 185px;
+}
 </style>
 </head>
 <body>
@@ -71,7 +74,8 @@
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				专业：<input type="text" id="major" name="major">
 				<br/><br/>
-				<div style="margin-left: 765px;" ><a id="selectBtn" href="javascript:;" class="btn btn-primary">查询</a></div>
+				<div style="margin-left: 675px; float: left;"  ><a id="selectBtn" href="javascript:;" class="btn btn-primary">查询</a></div>
+				<div style="margin-left: 25px; float: left;" ><a id="exportBtn" href="javascript:;" class="btn btn-primary">导出Excel</a></div>
 			</form>
 		</div>
 		<a id="addBtn" href="javascript:;">
@@ -88,7 +92,9 @@
 						<th>入学时间</th>
 						<th>联系方式</th>
 						<th>籍贯</th>
+						<c:if test="${user.role eq '管理员' || user.role eq '教导主任'}">
 						<th>操作</th>
+						</c:if>
 					</tr>
 				</thead>
 				<tbody>
@@ -104,19 +110,21 @@
 									<td>${s.enterTime}</td>
 									<td>${s.phone}</td>
 									<td>${s.address}</td>
+									<c:if test="${user.role eq '管理员' || user.role eq '教导主任'}">
 									<td>
-										
 										<a href="javascript:;"><img src="${pageContext.request.contextPath}/img/edit.png" title="修改" width="25px" height="22px"  onclick="editBtn(${s.stuId})"/></a>
 										<a href="javascript:;"><img src="${pageContext.request.contextPath}/img/delete.png" title="删除" width="25px" height="22px" onclick="deleteBtn(${s.stuId})"/></a>
 									</td>
+									</c:if>
 								</tr>
 							</c:forEach>
 						</c:when>
 						
 					</c:choose>
 				</tbody>
-			</table>
+			</table> 
 			<div id="btn-dialogBox"></div>
+			<div id="stantard-dialogBox"></div>
 		<!-- 	<div class="modalDiv" style="display: none;"></div>
 			<div id="formDiv" style="display: none;"></div> -->
 		</div>
@@ -138,6 +146,34 @@
 				$("#selectForm").attr("action","${pageContext.request.contextPath}/student/fuzzyQuery.action");
 				$("#selectForm").submit();
 			})
+			
+			$("#exportBtn").click(function(){
+				var stuNo = $("#stuNo").val();
+				var stuName = $("#stuName").val();
+				var gender = $("#gender").val();
+				var major = $("#major").val();
+				$.ajax({ 
+        			url: "${pageContext.request.contextPath}/student/exportExcel.action", 
+        			type:"post",
+        			data:"stuNo="+stuNo+"&stuName="+stuName+"&gender="+gender+"&major="+major, 
+        			dataType:"text",
+        			success: function(data){
+        	        	if(data == "success"){
+        	        		$('#stantard-dialogBox').dialogBox({
+        						title: '消息',
+        						hasClose: true,
+        						content: '导出成功！'
+        					});
+        	        	}else{
+        	        		$('#stantard-dialogBox').dialogBox({
+        						title: '消息',
+        						hasClose: true,
+        						content: '导出失败！'
+        					});
+        	        		
+        	        	}
+        	      }});
+			});
 			
 			$("#addBtn").click(function(){
 				location.href = "${pageContext.request.contextPath}/student/toadd.action";
@@ -175,7 +211,6 @@
 				title: '警告',
 				content: '是否修改该学生信息？'
 			});
-			
 		}
 		
 	

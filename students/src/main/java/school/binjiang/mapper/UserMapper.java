@@ -12,8 +12,14 @@ public interface UserMapper {
 	
 	public void updatePwdAndRole(User user);
 	
+	public void updatePwd(User user);
+	
 	public List<User> findAll();
 	
 	public User findByName(String name);
+	
+	public User findById(int id);
+	
+	public List<User> findByNameRole(User user);	
 
 }

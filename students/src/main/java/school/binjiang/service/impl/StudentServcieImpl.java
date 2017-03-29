@@ -9,6 +9,7 @@ import school.binjiang.mapper.StudentMapper;
 import school.binjiang.po.PageBean;
 import school.binjiang.po.Student;
 import school.binjiang.service.StudentService;
+import school.binjiang.vo.StudentVo;
 
 @Service
 public class StudentServcieImpl implements StudentService {
@@ -46,6 +47,18 @@ public class StudentServcieImpl implements StudentService {
 
 	public Student showByNoAndName(Student student) {
 		return stuMapper.findByNoAndName(student);
+	}
+
+	public List<StudentVo> showNumByMajor(StudentVo stuVo) {
+		return stuMapper.findNumByMajor(stuVo);
+	}
+
+	public List<StudentVo> showNumByGender(StudentVo stuVo) {
+		return stuMapper.findNumByGender(stuVo);
+	}
+
+	public List<StudentVo> showNumByAddress(StudentVo stuVo) {
+		return stuMapper.findNumByAddress(stuVo);
 	}
 
 }

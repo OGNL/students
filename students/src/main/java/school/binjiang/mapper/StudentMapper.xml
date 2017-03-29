@@ -59,7 +59,21 @@
 	<select id="findByNoAndName" parameterType="Student" resultType="Student">
 		select * from t_student where stuNo = #{stuNo} and stuName = #{stuName}
 	</select>
-		
+	
+	<select id="findNumByMajor" parameterType="StudentVo" resultType="StudentVo">
+		select major, count(*) rs from t_student where enterTime &gt;= #{startDate} and enterTime &lt;= #{endDate} GROUP BY major
+	</select>
+	
+	<select id="findNumByGender" parameterType="StudentVo" resultType="StudentVo">
+		select gender, count(*) rs from t_student where enterTime &gt;= #{startDate} and enterTime &lt;= #{endDate} GROUP BY gender
+	</select>
+	
+	<select id="findNumByAddress" parameterType="StudentVo" resultType="StudentVo">
+		select address, count(*) rs from t_student where enterTime &gt;= #{startDate} and enterTime &lt;= #{endDate} 
+		GROUP BY address order by rs desc
+	</select>
+	
+
 		
 	
 </mapper>

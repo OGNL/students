@@ -13,8 +13,8 @@
 	</delete>
 	
 	<update id="update" parameterType="Score">
-		update t_score set english = #{english}, math = #{math}, computer = #{computer}, mzd = #{mzd}, dxp = #{dxp}
-		sports = #{sports}, mks = #{mks}, xxds = #{xxds} where scoreId = #{scoreId}
+		update t_score set english = #{english}, math = #{math}, computer = #{computer}, mzd = #{mzd}, dxp = #{dxp},
+		 xxds = #{xxds}, history = #{history} where scoreId = #{scoreId}
 	</update>
 	
 	<resultMap type="Score" id="ScoreStudentMap">
@@ -26,6 +26,10 @@
 		<result property="dxp" column="dxp"/>
 		<result property="history" column="history"/>
 		<result property="xxds" column="xxds"/>
+			<result property="stuNo" column="stuNo"/>
+			<result property="stuName" column="stuName"/>
+			<result property="major" column="major"/>
+			<result property="gender" column="gender"/>
 		<association property="stu" javaType="Student">
 			<id property="stuId" column="stuId"/>
 			<result property="stuNo" column="stuNo"/>

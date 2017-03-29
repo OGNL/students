@@ -4,6 +4,7 @@ import java.util.List;
 
 import school.binjiang.po.PageBean;
 import school.binjiang.po.Student;
+import school.binjiang.vo.StudentVo;
 
 public interface StudentMapper {
 	
@@ -22,5 +23,11 @@ public interface StudentMapper {
 	public Student findById(int id);
 	
 	public Student findByNoAndName(Student student);
+	
+	public List<StudentVo> findNumByMajor(StudentVo stuVo);
+	
+	public List<StudentVo> findNumByGender(StudentVo stuVo);
+	
+	public List<StudentVo> findNumByAddress(StudentVo stuVo);
 
 }

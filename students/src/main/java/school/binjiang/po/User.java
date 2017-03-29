@@ -12,7 +12,7 @@ public class User implements Serializable {
 	private int userId;
 	private String username;
 	private String password;
-	private int roleId;
+	private String role;
 	
 	public int getUserId() {
 		return userId;
@@ -32,11 +32,11 @@ public class User implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public int getRoleId() {
-		return roleId;
+	public String getRole() {
+		return role;
 	}
-	public void setRoleId(int roleId) {
-		this.roleId = roleId;
+	public void setRole(String role) {
+		this.role = role;
 	}
 	
 	

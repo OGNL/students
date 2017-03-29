@@ -17,16 +17,16 @@
                 </a>
             <ul class="nav navbar-top-links navbar-right">
                 <!-- /.dropdown -->
-          		   ${user.username}
+          		   <c:out value="${user.username}"></c:out>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
                     <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
 						
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i>个人资料</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i>修改密码</a>
+                       <!--  <li><a href="#"><i class="fa fa-user fa-fw"></i>个人资料</a>
+                        </li> -->
+                        <li><a href="${pageContext.request.contextPath}/user/toupdate.action"><i class="fa fa-gear fa-fw"></i>修改密码</a>
                         </li>
                         <li class="divider"></li>
                         <li><a href="${pageContext.request.contextPath}/user/exit.action"><i class="fa fa-sign-out fa-fw"></i>退出</a>

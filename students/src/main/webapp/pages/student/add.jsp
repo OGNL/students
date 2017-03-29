@@ -46,6 +46,48 @@
                             </div>
                         </div>
                         
+                         <div class="form-group">
+                            <label class="col-lg-3 control-label">籍贯</label>
+                            <div class="col-lg-5">
+                                <select class="form-control" id="address" name="address">
+                                	<option value="">---请选择---</option>
+                                	<option value="北京市">北京市</option>
+                                	<option value="上海市">上海市</option>
+                                	<option value="天津市">天津市</option>
+                                	<option value="重庆市">重庆市</option>
+                                	<option value="黑龙江省">黑龙江省</option>
+                                	<option value="吉林省">吉林省</option>
+                                	<option value="辽宁省">辽宁省</option>
+                                	<option value="江苏省">江苏省</option>
+                                	<option value="山东省">山东省</option>
+                                	<option value="安徽省">安徽省</option>
+                                	<option value="河北省">河北省</option>
+                                	<option value="河南省">河南省</option>
+                                	<option value="湖北省">湖北省</option>
+                                	<option value="湖南省">湖南省</option>
+                                	<option value="江西省">江西省</option>
+                                	<option value="陕西省">陕西省</option>
+                                	<option value="山西省">山西省</option>
+                                	<option value="四川省">四川省</option>
+                                	<option value="青海省">青海省</option>
+                                	<option value="海南省">海南省</option>
+                                	<option value="广东省">广东省</option>
+                                	<option value="贵州省">贵州省</option>
+                                	<option value="浙江省">浙江省</option>
+                                	<option value="福建省">福建省</option>
+                                	<option value="甘肃省">甘肃省</option>
+                                	<option value="云南省">云南省</option>
+                                	<option value="内蒙古自治区">内蒙古自治区</option>
+                                	<option value="宁夏回族自治区">宁夏回族自治区</option>
+                                	<option value="新疆维吾尔自治区">新疆维吾尔自治区</option>
+                                	<option value="西藏自治区">西藏自治区</option>
+                                	<option value="广西壮族自治区">广西壮族自治区</option>
+                                	<option value="香港特别行政区">香港特别行政区</option>
+                                	<option value="澳门特别行政区">澳门特别行政区</option>
+                                </select>
+                            </div>
+                        </div>
+                        
                         <div class="form-group">
                             <label class="col-lg-3 control-label">性别</label>
                             <div class="col-lg-5">
@@ -62,6 +104,8 @@
                                
                             </div>
                         </div>
+                        
+                      
 
                         <div class="form-group">
                             <label class="col-lg-3 control-label">专业</label>
@@ -75,14 +119,14 @@
                             <div class="col-lg-5">
                               <!--  <input type="text" readonly style="width: 200px" name="birthday" id="birthday" class="form-control" value="03/18/2013" />  -->
                                
-                                 <input  id ="birthday"type="text" class="form-control" name="birthday" readonly="readonly" value="1990-01-01"/> 
+                                 <input  id ="birthday"type="text" class="form-control" name="birthday" readonly="readonly" value="1995-01-01"/> 
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-lg-3 control-label">入学时间</label>
                             <div class="col-lg-5">
-                                <input id="enterTime" type="text" class="form-control" name="enterTime" readonly="readonly"  value="2010-09-01"/>
+                                <input id="enterTime" type="text" class="form-control" name="enterTime" readonly="readonly"  value="2013-09-01"/>
                             </div>
                         </div>
 
@@ -90,13 +134,6 @@
                             <label class="col-lg-3 control-label">联系方式</label>
                             <div class="col-lg-5">
                                 <input type="text" class="form-control" name="phone" />
-                            </div>
-                        </div>
-                        
-                         <div class="form-group">
-                            <label class="col-lg-3 control-label">籍贯</label>
-                            <div class="col-lg-5">
-                                <input type="text" class="form-control" name="address" />
                             </div>
                         </div>
 
@@ -118,6 +155,14 @@
 <script src="${pageContext.request.contextPath}/js/bootstrapValidator.js" type="text/javascript"></script>
 <script type="text/javascript">
 showMenu(1);
+
+$('#birthday').fdatepicker({
+	format: 'yyyy-mm-dd',
+});
+$('#enterTime').fdatepicker({
+	format: 'yyyy-mm-dd',
+});
+
 $('#defaultForm').bootstrapValidator({
 //    live: 'disabled',
 
@@ -140,11 +185,6 @@ $('#defaultForm').bootstrapValidator({
                 remote:{
                 	  url: '${pageContext.request.contextPath}/student/checkStuNo.action',  
                       message:"学号已存在！",  
-              /*         type: "post",  
-                      dataType: 'json',  
-                      data: {  
-                            stuNo : $("#stuNo").val()
-                      },   */
                       delay: 2000,  
                 }
             }
@@ -229,5 +269,4 @@ $('#defaultForm').bootstrapValidator({
 
 
 </script>
-<jsp:include page="../common/validate.jsp"></jsp:include>
 </html>

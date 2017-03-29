@@ -189,6 +189,7 @@ button:active {
 	background:#72D1FF;
 	border:1px solid #72D1FF;
 	border-radius:4px;
+	text-decoration: none;
 }
 .alert .alert_con .btn:hover{
 	background:#4FB2EF;
