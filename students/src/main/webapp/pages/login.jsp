@@ -20,54 +20,6 @@
 		<script src="${pageContext.request.contextPath}/js/jquery.min.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/js/login/supersized.3.2.7.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/login/supersized-init.js"></script>
-		<script>
-		
-		$("#submit").live('click',function(){
-			var username = $("#username").val();
-			var password = $("#password").val();
-			if(username == '' || username == null || password ==''|| password == null )
-			{
-				$("#ts").html("用户名或密码不能为空！");
-				is_show();
-			}
-			else if(username.length<2){
-					$("#ts").html("用户名至少2位！");
-					is_show();
-			}else if(password.length<5){
-				$("#ts").html("密码至少5位！");
-				is_show();
-			}else{
-				
-				$.ajax({
-					type:"post",
-					url:"${pageContext.request.contextPath}/user/verify.action",
-					data:"username="+username+"&password="+password,
-					dataType:"text",
-					success:function(data){
-						if(data == "success"){
-							location.href = "${pageContext.request.contextPath}/user/dologin.action";
-						}else{
-							$("#ts").html("用户名或密码错误！");
-							is_show();
-						}
-					}
-				})
-			}
-		});
-		window.onload = function()
-		{
-			$(".connect p").eq(0).animate({"left":"0%"}, 600);
-			$(".connect p").eq(1).animate({"left":"0%"}, 400);
-			
-			$("#btn").click(function(){
-				is_hide();
-			})
-		
-		}
-		function is_hide(){ $(".alert").animate({"top":"-40%"}, 300) }
-		function is_show(){ $(".alert").show().animate({"top":"45%"}, 300) }
-		</script>
-
 
     </head>
 
@@ -95,6 +47,53 @@
 			</div>
 		</div>
     </body>
+    <script>
+
+        $("#submit").on('click',function(){
+            var username = $("#username").val();
+            var password = $("#password").val();
+            if(username == '' || username == null || password ==''|| password == null )
+            {
+                $("#ts").html("用户名或密码不能为空！");
+                is_show();
+            }
+            else if(username.length<2){
+                $("#ts").html("用户名至少2位！");
+                is_show();
+            }else if(password.length<5){
+                $("#ts").html("密码至少5位！");
+                is_show();
+            }else{
+
+                $.ajax({
+                    type:"post",
+                    url:"${pageContext.request.contextPath}/user/verify.action",
+                    data:"username="+username+"&password="+password,
+                    dataType:"text",
+                    success:function(data){
+                        if(data == "success"){
+                            location.href = "${pageContext.request.contextPath}/user/dologin.action";
+                        }else{
+                            $("#ts").html("用户名或密码错误！");
+                            is_show();
+                        }
+                    }
+                })
+            }
+        });
+        window.onload = function()
+        {
+            $(".connect p").eq(0).animate({"left":"0%"}, 600);
+            $(".connect p").eq(1).animate({"left":"0%"}, 400);
+
+            $("#btn").click(function(){
+                is_hide();
+            })
+
+        }
+        function is_hide(){ $(".alert").animate({"top":"-40%"}, 300) }
+        function is_show(){ $(".alert").show().animate({"top":"45%"}, 300) }
+    </script>
 
 </html>
 
