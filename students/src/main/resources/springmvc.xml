@@ -26,7 +26,8 @@
 	
 	<!-- 注解映射器和注解适配器 -->
 	<mvc:annotation-driven></mvc:annotation-driven>
-	
+
+	<context:component-scan base-package="school.binjiang.mapper"></context:component-scan>
 	<context:component-scan base-package="school.binjiang.service.impl"></context:component-scan>
 	<context:component-scan base-package="school.binjiang.controller"></context:component-scan>
 	

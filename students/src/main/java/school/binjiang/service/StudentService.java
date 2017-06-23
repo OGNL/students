@@ -8,21 +8,21 @@ import school.binjiang.vo.StudentVo;
 
 public interface StudentService {
 	
-	public void add(Student student);
+	 void add(Student student);
 	
-	public void delete(int id);
+	 void delete(int id);
 	
-	public void update(Student student);
+	 void update(Student student);
 	
-	public Student showByStuNo(String stuNo);
+	 Student showByStuNo(String stuNo);
 	
-	public List<Student> showByNoNameGenderMajor(PageBean page);
+	 List<Student> showByNoNameGenderMajor(PageBean page);
 	
-	public int getStudentCount(PageBean page);
+	 int getStudentCount(PageBean page);
 	
-	public Student showById(int id);
+	 Student showById(int id);
 	
-	public Student showByNoAndName(Student student);
+	 Student showByNoAndName(Student student);
 	
 	public List<StudentVo> showNumByMajor(StudentVo stuVo);
 	

@@ -7,16 +7,16 @@ import school.binjiang.po.Student;
 
 public interface GradeService {
 	
-	public void add(Grade grade);
-	
-	public void delete(int id);
-	
-	public void update(Grade grade);
-	
-	public Grade showById(int id);
-	
-	public Grade showByStuId(int stuId);
-	
-	public List<Grade> showByNoNameGenderMajor(Student student);
+	 void add(Grade grade);
+
+	 void delete(int id);
+
+	 void update(Grade grade);
+
+	 Grade showById(int id);
+
+	 Grade showByStuId(int stuId);
+
+	 List<Grade> showByNoNameGenderMajor(Student student);
 
 }

@@ -2,21 +2,23 @@ package school.binjiang.mapper;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
 import school.binjiang.po.Score;
 import school.binjiang.po.Student;
 
+@Repository
 public interface ScoreMapper {
 	
-	public void add(Score score);
+	 void add(Score score);
 	
-	public void delete(int id);
+	 void delete(int id);
 	
-	public void update(Score score);
+	 void update(Score score);
 	
-	public List<Score> findByNoNameMajor(Student student);
+	 List<Score> findByNoNameMajor(Student student);
 	
-	public Score findById(int id);
+	 Score findById(int id);
 	
-	public Score findByStuId(int stuId);
+	 Score findByStuId(int stuId);
 
 }

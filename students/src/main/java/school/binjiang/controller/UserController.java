@@ -1,23 +1,21 @@
 package school.binjiang.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
+import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
-import net.sf.json.JSONObject;
 import school.binjiang.po.User;
 import school.binjiang.service.UserService;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -77,8 +75,8 @@ public class UserController {
 		if(!pwd1.equals(user.getPassword())){
 			flag = false;
 		}
-	    JSONObject json = new JSONObject();
-	    json.element("valid",flag);
+		JsonObject json = new JsonObject();
+		json.addProperty("valid",flag);
 	    return json.toString();
 	}
 	
@@ -114,8 +112,8 @@ public class UserController {
 		if(user != null){
 			flag = false;
 		}
-	    JSONObject json = new JSONObject();
-	    json.element("valid",flag);
+		JsonObject json = new JsonObject();
+		json.addProperty("valid",flag);
 	    return json.toString();
 	}
 	

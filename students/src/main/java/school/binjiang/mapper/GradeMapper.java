@@ -2,20 +2,22 @@ package school.binjiang.mapper;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
 import school.binjiang.po.Grade;
 import school.binjiang.po.Student;
 
+@Repository
 public interface GradeMapper {
 	
-	public void add(Grade grade);
+	 void add(Grade grade);
 	
-	public void delete(int id);
+	 void delete(int id);
 	
-	public void update(Grade grade);
+	 void update(Grade grade);
 	
-	public Grade findById(int id);
+	 Grade findById(int id);
 	
-	public Grade findByStuId(int stuId);
+	 Grade findByStuId(int stuId);
 	
-	public List<Grade> findByNoNameGenderMajor(Student student);
+	 List<Grade> findByNoNameGenderMajor(Student student);
 }

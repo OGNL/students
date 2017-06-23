@@ -7,10 +7,13 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,8 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
+
 import school.binjiang.po.PageBean;
 import school.binjiang.po.Student;
 import school.binjiang.service.StudentService;
@@ -33,7 +35,8 @@ public class StudentController {
 	
 	@Autowired
 	private StudentService stuService;
-	
+
+	private Gson gson = new Gson();
 	private static final int count = 10;
 	//文件导出路径
 	private static final String url = "C:\\Users\\Administrator\\Desktop";
@@ -89,8 +92,8 @@ public class StudentController {
 		if(stu != null){
 			flag = false;
 		}
-	    JSONObject json = new JSONObject();
-	    json.element("valid",flag);
+		JsonObject json = new JsonObject();
+		json.addProperty("valid",flag);
 	    return json.toString();
 	}
 	
@@ -122,9 +125,9 @@ public class StudentController {
 		sv.setStartDate(startDate);
 		sv.setEndDate(endDate);
 		List<StudentVo> list = stuService.showNumByGender(sv);
-		JSONArray json = JSONArray.fromObject(list);
+		String jsonStr = gson.toJson(list);
 		PrintWriter out = response.getWriter();
-		out.print(json);
+		out.print(jsonStr);
 		out.flush();
 		out.close();
 	}
@@ -137,9 +140,9 @@ public class StudentController {
 		sv.setStartDate(startDate);
 		sv.setEndDate(endDate);
 		List<StudentVo> list = stuService.showNumByMajor(sv);
-		JSONArray json = JSONArray.fromObject(list);
+		String jsonStr = gson.toJson(list);
 		PrintWriter out = response.getWriter();
-		out.print(json);
+		out.print(jsonStr);
 		out.flush();
 		out.close();
 	}
@@ -167,9 +170,9 @@ public class StudentController {
 			stuVo.setRs(rsTotal);
 			result.add(stuVo);
 		}
-		JSONArray json = JSONArray.fromObject(result);
+		String jsonStr = gson.toJson(list);
 		PrintWriter out = response.getWriter();
-		out.print(json);
+		out.print(jsonStr);
 		out.flush();
 		out.close();
 	}

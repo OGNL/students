@@ -1,14 +1,7 @@
 package school.binjiang.controller;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,14 +9,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
-import net.sf.json.JSONObject;
 import school.binjiang.po.Grade;
-import school.binjiang.po.Score;
 import school.binjiang.po.Student;
 import school.binjiang.service.GradeService;
 import school.binjiang.service.StudentService;
 import school.binjiang.util.ExcelUtil;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 
 @Controller
 @RequestMapping("/grade")
@@ -33,6 +31,8 @@ public class GradeController {
 	private GradeService gradeService;
 	@Autowired
 	private StudentService stuService;
+
+	private Gson gson = new Gson();
 	//文件导出路径
 	private static final String url = "C:\\Users\\Administrator\\Desktop";
 	
@@ -63,8 +63,8 @@ public class GradeController {
 				flag = false;
 			}
 		}
-	    JSONObject json = new JSONObject();
-	    json.element("valid",flag);
+		JsonObject json = new JsonObject();
+		json.addProperty("valid",flag);
 	    return json.toString();
 	}
 	

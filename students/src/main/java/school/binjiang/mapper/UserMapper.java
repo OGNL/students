@@ -2,24 +2,26 @@ package school.binjiang.mapper;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
 import school.binjiang.po.User;
 
+@Repository
 public interface UserMapper {
 	
-	public void add(User user);
+	 void add(User user);
 	
-	public void delete(int id);
+	 void delete(int id);
 	
-	public void updatePwdAndRole(User user);
+	 void updatePwdAndRole(User user);
 	
-	public void updatePwd(User user);
+	 void updatePwd(User user);
 	
-	public List<User> findAll();
+	 List<User> findAll();
 	
-	public User findByName(String name);
+	 User findByName(String name);
 	
-	public User findById(int id);
+	 User findById(int id);
 	
-	public List<User> findByNameRole(User user);	
+	 List<User> findByNameRole(User user);
 
 }

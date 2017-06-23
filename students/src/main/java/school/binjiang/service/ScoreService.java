@@ -7,16 +7,16 @@ import school.binjiang.po.Student;
 
 public interface ScoreService {
 	
-	public void add(Score score);
+	 void add(Score score);
 	
-	public void delete(int id);
+	 void delete(int id);
 	
-	public void update(Score score);
+	 void update(Score score);
 	
-	public List<Score> showByNoNameMajor(Student student);
+	 List<Score> showByNoNameMajor(Student student);
 	
-	public Score showById(int id);
+	 Score showById(int id);
 	
-	public Score showByStuId(int stuId);
+	 Score showByStuId(int stuId);
 
 }

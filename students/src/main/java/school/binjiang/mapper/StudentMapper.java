@@ -2,32 +2,34 @@ package school.binjiang.mapper;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
 import school.binjiang.po.PageBean;
 import school.binjiang.po.Student;
 import school.binjiang.vo.StudentVo;
 
+@Repository
 public interface StudentMapper {
 	
-	public void add(Student student);
+	 void add(Student student);
 	
-	public void delete(int id);
+	 void delete(int id);
 	
-	public void update(Student student);
+	 void update(Student student);
 	
-	public Student findByStuNo(String stuNo);
+	 Student findByStuNo(String stuNo);
 	
-	public List<Student> findByNoNameGenderMajor(PageBean page);
+	 List<Student> findByNoNameGenderMajor(PageBean page);
 	
-	public int getStudentCount(PageBean page);
+	 int getStudentCount(PageBean page);
 	
-	public Student findById(int id);
+	 Student findById(int id);
 	
-	public Student findByNoAndName(Student student);
+	 Student findByNoAndName(Student student);
 	
-	public List<StudentVo> findNumByMajor(StudentVo stuVo);
+	 List<StudentVo> findNumByMajor(StudentVo stuVo);
 	
-	public List<StudentVo> findNumByGender(StudentVo stuVo);
+	 List<StudentVo> findNumByGender(StudentVo stuVo);
 	
-	public List<StudentVo> findNumByAddress(StudentVo stuVo);
+	 List<StudentVo> findNumByAddress(StudentVo stuVo);
 
 }
